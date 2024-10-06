@@ -18,5 +18,10 @@ namespace Core
             Stock = stock;
             Category = category;
         }
+
+        public override string? ToString()
+        {
+            return $"Товар: {Name}.\nКатегория: {Category}.\nСтоимость: {Price}.";
+        }
     }
 }

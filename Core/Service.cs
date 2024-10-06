@@ -11,16 +11,19 @@ namespace Core
         public int Id;
         public string Name;
         public double Price;
-        public double Stock;
         
         public ProductCategory Category;
-        public Service(int id, string name, double price, double stock, ProductCategory category)
+        public Service(int id, string name, double price, ProductCategory category)
         {
             Id = id;
             Name = name;
             Price = price;
-            Stock = stock;
             Category = category;
+        }
+
+        public override string? ToString()
+        {
+            return $"Услуга: {Name}. Стоимость: {Price}. Доступно для товаров категории: {Category}";
         }
     }
 }
