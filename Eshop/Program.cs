@@ -35,21 +35,21 @@ namespace Eshop
         private static void Execute(string? command)
         {
 
-            var commandToCheck = command;
+            var commandToCheck = command.ToLower();
 
             var countToShow = 0;
-            if (command.StartsWith(ShowProductsCommand.Name))
+            if (commandToCheck.StartsWith(ShowProductsCommand.Name))
             {
                 commandToCheck = ShowProductsCommand.Name;
                 Int32.TryParse(GetParameterFromCommand(command, 3), out countToShow);
             } 
-            else if (command.StartsWith(ShowServicesCommand.Name))
+            else if (commandToCheck.StartsWith(ShowServicesCommand.Name))
             {
                 commandToCheck = ShowServicesCommand.Name;
                 Int32.TryParse(GetParameterFromCommand(command, 3), out countToShow);
             }
 
-            switch (commandToCheck.ToLower())
+            switch (commandToCheck)
             {
                 case DisplayCommandsCommand.Name:
                     Console.WriteLine("\n" + DisplayCommandsCommand.GetInfo() + "\n");
