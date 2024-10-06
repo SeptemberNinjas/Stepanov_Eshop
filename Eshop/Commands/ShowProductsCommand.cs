@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Eshop.Commands
 {
-    internal static class ShowProducts
+    internal static class ShowProductsCommand
     {
         public const string Name = "Показать товары";
 

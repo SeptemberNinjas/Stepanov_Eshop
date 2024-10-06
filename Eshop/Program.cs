@@ -19,19 +19,56 @@ namespace Eshop
             AddSampleServices();
 
             Console.WriteLine("Консольный интернет-магазин");
+            Console.WriteLine();
 
             while (true)
             {
+                Console.WriteLine("(Для показа всех команд введите \"Команды\". Для выхода введите \"Выход\")");
                 Console.WriteLine("Введите команду:");
                 var command = Console.ReadLine();
-
+                Execute(command);
             }
-
-
-            ShowProducts.Execute(products);
-            
             
         }
+
+        private static void Execute(string? command)
+        {
+
+            var commandToCheck = command;
+
+            var countToShow = 0;
+            if (command.StartsWith(ShowProductsCommand.Name))
+            {
+                commandToCheck = ShowProductsCommand.Name;
+                countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
+            } 
+            else if (commandToCheck.StartsWith(ShowServicesCommand.Name))
+            {
+                commandToCheck = ShowServicesCommand.Name;
+                countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
+            }
+
+            switch (commandToCheck)
+            {
+                case DisplayCommandsCommand.Name:
+                    DisplayCommandsCommand.Execute();
+                    break;
+                case ExitCommand.Name:
+                    ExitCommand.Execute();
+                    break;
+                case ShowProductsCommand.Name:
+                    ShowProductsCommand.Execute(products, countToShow);
+                    break;
+                case ShowServicesCommand.Name:
+                    ShowServicesCommand.Execute(services, countToShow);
+                    break;
+                default:
+                    Console.WriteLine("Неизвестная команда");
+                    break;
+            };
+
+        }
+
         private static void AddSampleCategories()
         {
             categories.Add(new ProductCategory(1, "Смартфоны"));
@@ -67,6 +104,20 @@ namespace Eshop
             services.Add(new Service(3, "Чистка клавиатуры", 1500, categories[2]));
             services.Add(new Service(4, "Диагностика", 8000, categories[1]));
 
+        }
+
+        private static string GetParameterFromCommand(string command, int parameterNumber)
+        {
+            var parameter = "";
+
+            var commandCompound = command.Split(' ');
+            if (commandCompound.Length >= parameterNumber)
+            {
+                int parameterIndex = parameterNumber - 1;
+                parameter = commandCompound[parameterIndex];
+            }
+
+            return parameter;
         }
 
         private static void Init()
