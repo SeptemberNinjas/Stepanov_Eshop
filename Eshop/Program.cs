@@ -27,6 +27,7 @@ namespace Eshop
                 Console.WriteLine("Введите команду:");
                 var command = Console.ReadLine();
                 Execute(command);
+                Console.WriteLine();
             }
             
         }
@@ -40,26 +41,36 @@ namespace Eshop
             if (command.StartsWith(ShowProductsCommand.Name))
             {
                 commandToCheck = ShowProductsCommand.Name;
-                countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
+                var currentParameter = GetParameterFromCommand(command, 3);
+                if (currentParameter != "")
+                    countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
             } 
             else if (commandToCheck.StartsWith(ShowServicesCommand.Name))
             {
                 commandToCheck = ShowServicesCommand.Name;
-                countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
+                var currentParameter = GetParameterFromCommand(command, 3);
+                if (currentParameter != "")
+                    countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
             }
 
             switch (commandToCheck)
             {
                 case DisplayCommandsCommand.Name:
+                    Console.WriteLine(DisplayCommandsCommand.GetInfo());
+                    Console.WriteLine();
                     DisplayCommandsCommand.Execute();
                     break;
                 case ExitCommand.Name:
                     ExitCommand.Execute();
                     break;
                 case ShowProductsCommand.Name:
+                    Console.WriteLine(ShowProductsCommand.GetInfo());
+                    Console.WriteLine();
                     ShowProductsCommand.Execute(products, countToShow);
                     break;
                 case ShowServicesCommand.Name:
+                    Console.WriteLine(ShowServicesCommand.GetInfo());
+                    Console.WriteLine();
                     ShowServicesCommand.Execute(services, countToShow);
                     break;
                 default:

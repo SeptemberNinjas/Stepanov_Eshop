@@ -13,7 +13,7 @@ namespace Eshop.Commands
 
         public static string GetInfo()
         {
-            return "Показать список команды.";
+            return "Список команд.";
         }
 
         public static void Execute()

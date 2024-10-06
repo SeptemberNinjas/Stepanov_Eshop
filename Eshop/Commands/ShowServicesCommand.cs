@@ -13,12 +13,12 @@ namespace Eshop.Commands
 
         public static string GetInfo()
         {
-            return "Показать список услуг. Опционально можно указать количество выводимых услуг.";
+            return "Список услуг. Опционально можно указать количество выводимых услуг.";
         }
 
         public static void Execute(List<Service> services, int count = 0)
         {
-            int countToShow = (count == 0) ? services.Count() : count;
+            int countToShow = (count == 0 || count > services.Count()) ? services.Count() : count;
 
             for (int i = 0; i < countToShow; i++)
                 Console.WriteLine(services[i] + "\n");

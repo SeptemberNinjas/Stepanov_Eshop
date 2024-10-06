@@ -13,12 +13,12 @@ namespace Eshop.Commands
 
         public static string GetInfo()
         {
-            return "Показать список товаров. Опционально можно указать количество выводимых товаров.";
+            return "Список товаров. Опционально можно указать количество выводимых товаров.";
         }
 
         public static void Execute(List<Product> products, int count = 0)
         {
-            int countToShow = (count == 0) ? products.Count() : count;
+            int countToShow = (count == 0 || count > products.Count()) ? products.Count() : count;
 
             for (int i = 0; i < countToShow; i++)
                 Console.WriteLine(products[i] + "\n");
