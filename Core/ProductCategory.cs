@@ -8,12 +8,12 @@ namespace Core
 {
     public class ProductCategory
     {
-        private int _id { get => _id; set => _id = value; }
-        private string _name { get => _name; set => _name = value; }
+        public int Id;
+        public string Name;
         public ProductCategory(int id, string name)
         {
-            _id = id;
-            _name = name;
+            Id = id;
+            Name = name;
         }
 
     }
