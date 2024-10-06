@@ -9,7 +9,7 @@ namespace Eshop.Commands
 {
     internal static class ShowProductsCommand
     {
-        public const string Name = "Показать товары";
+        public const string Name = "показать товары";
 
         public static string GetInfo()
         {

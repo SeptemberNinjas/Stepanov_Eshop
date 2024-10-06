@@ -41,19 +41,15 @@ namespace Eshop
             if (command.StartsWith(ShowProductsCommand.Name))
             {
                 commandToCheck = ShowProductsCommand.Name;
-                var currentParameter = GetParameterFromCommand(command, 3);
-                if (currentParameter != "")
-                    countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
+                Int32.TryParse(GetParameterFromCommand(command, 3), out countToShow);
             } 
-            else if (commandToCheck.StartsWith(ShowServicesCommand.Name))
+            else if (command.StartsWith(ShowServicesCommand.Name))
             {
                 commandToCheck = ShowServicesCommand.Name;
-                var currentParameter = GetParameterFromCommand(command, 3);
-                if (currentParameter != "")
-                    countToShow = Convert.ToInt32(GetParameterFromCommand(command, 3));
+                Int32.TryParse(GetParameterFromCommand(command, 3), out countToShow);
             }
 
-            switch (commandToCheck)
+            switch (commandToCheck.ToLower())
             {
                 case DisplayCommandsCommand.Name:
                     Console.WriteLine("\n" + DisplayCommandsCommand.GetInfo() + "\n");
@@ -71,7 +67,7 @@ namespace Eshop
                     ShowServicesCommand.Execute(services, countToShow);
                     break;
                 default:
-                    Console.WriteLine("Неизвестная команда");
+                    Console.WriteLine("\n" + "Неизвестная команда");
                     break;
             };
 

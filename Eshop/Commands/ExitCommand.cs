@@ -9,7 +9,7 @@ namespace Eshop.Commands
 {
     internal static class ExitCommand
     {
-        public const string Name = "Выход";
+        public const string Name = "выход";
 
         public static string GetInfo()
         {
