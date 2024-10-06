@@ -56,21 +56,18 @@ namespace Eshop
             switch (commandToCheck)
             {
                 case DisplayCommandsCommand.Name:
-                    Console.WriteLine(DisplayCommandsCommand.GetInfo());
-                    Console.WriteLine();
+                    Console.WriteLine("\n" + DisplayCommandsCommand.GetInfo() + "\n");
                     DisplayCommandsCommand.Execute();
                     break;
                 case ExitCommand.Name:
                     ExitCommand.Execute();
                     break;
                 case ShowProductsCommand.Name:
-                    Console.WriteLine(ShowProductsCommand.GetInfo());
-                    Console.WriteLine();
+                    Console.WriteLine("\n" + ShowProductsCommand.GetInfo() + "\n");
                     ShowProductsCommand.Execute(products, countToShow);
                     break;
                 case ShowServicesCommand.Name:
-                    Console.WriteLine(ShowServicesCommand.GetInfo());
-                    Console.WriteLine();
+                    Console.WriteLine("\n" + ShowServicesCommand.GetInfo() + "\n");
                     ShowServicesCommand.Execute(services, countToShow);
                     break;
                 default:
