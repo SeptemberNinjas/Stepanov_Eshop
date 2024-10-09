@@ -1,16 +1,15 @@
-﻿using System.Xml.Linq;
-
-namespace Core
+﻿
+namespace Eshop.Core
 {
     public class Product
     {
         public int Id;
         public string Name;
-        public double Price;
+        public decimal Price;
         public int Stock;
         public ProductCategory Category;
 
-        public Product(int id, string name, double price, int stock, ProductCategory category)
+        public Product(int id, string name, decimal price, int stock, ProductCategory category)
         {
             Id = id;
             Name = name;

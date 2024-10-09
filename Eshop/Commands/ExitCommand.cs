@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Eshop.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Eshop.Commands
 {
     internal static class ExitCommand
     {
-        public const string Name = "выход";
+        public const string Name = "Выход";
 
         public static string GetInfo()
         {

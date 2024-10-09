@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Eshop.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Eshop.Commands
 {
     internal static class ShowProductsCommand
     {
-        public const string Name = "показать товары";
+        public const string Name = "ПоказатьТовары";
 
         public static string GetInfo()
         {
@@ -18,11 +18,14 @@ namespace Eshop.Commands
 
         public static void Execute(List<Product> products, int count = 0)
         {
-            int countToShow = (count == 0 || count > products.Count()) ? products.Count() : count;
+            var countToShow = (count <= 0 || count > products.Count) ? products.Count : count;
 
-            for (int i = 0; i < countToShow; i++)
-                Console.WriteLine(products[i] + "\n");
-
+            for (var i = 0; i < countToShow; i++)
+            {
+                Console.WriteLine(products[i]);
+                Console.WriteLine();
+            }
+                
         }
 
     }

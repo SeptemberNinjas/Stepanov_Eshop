@@ -1,19 +1,17 @@
 ﻿
-using Core;
+using Eshop.Core;
 using Eshop.Commands;
 
 namespace Eshop
 {
     internal class Program
     {
-        private static List<Product> products;
-        private static List<Service> services;
-        private static List<ProductCategory> categories;
+        private readonly static List<Product> products = new List<Product>();
+        private readonly static List<Service> services = new List<Service>();
+        private readonly static List<ProductCategory> categories = new List<ProductCategory>();
         static void Main(string[] args)
         {
 
-            Init();
-            
             AddSampleCategories();
             AddSampleProducts();
             AddSampleServices();
@@ -35,39 +33,46 @@ namespace Eshop
         private static void Execute(string? command)
         {
 
-            var commandToCheck = command.ToLower();
+            var commandToCheck = command;
 
             var countToShow = 0;
             if (commandToCheck.StartsWith(ShowProductsCommand.Name))
             {
                 commandToCheck = ShowProductsCommand.Name;
-                Int32.TryParse(GetParameterFromCommand(command, 3), out countToShow);
+                int.TryParse(GetParameterFromCommand(command, 2), out countToShow);
             } 
             else if (commandToCheck.StartsWith(ShowServicesCommand.Name))
             {
                 commandToCheck = ShowServicesCommand.Name;
-                Int32.TryParse(GetParameterFromCommand(command, 3), out countToShow);
+                int.TryParse(GetParameterFromCommand(command, 2), out countToShow);
             }
 
             switch (commandToCheck)
             {
                 case DisplayCommandsCommand.Name:
-                    Console.WriteLine("\n" + DisplayCommandsCommand.GetInfo() + "\n");
+                    Console.WriteLine();
+                    Console.WriteLine(DisplayCommandsCommand.GetInfo());
+                    Console.WriteLine();
                     DisplayCommandsCommand.Execute();
                     break;
                 case ExitCommand.Name:
                     ExitCommand.Execute();
                     break;
                 case ShowProductsCommand.Name:
-                    Console.WriteLine("\n" + ShowProductsCommand.GetInfo() + "\n");
+                    Console.WriteLine();
+                    Console.WriteLine(ShowProductsCommand.GetInfo());
+                    Console.WriteLine();
                     ShowProductsCommand.Execute(products, countToShow);
                     break;
                 case ShowServicesCommand.Name:
-                    Console.WriteLine("\n" + ShowServicesCommand.GetInfo() + "\n");
+                    Console.WriteLine();
+                    Console.WriteLine(ShowServicesCommand.GetInfo());
+                    Console.WriteLine();
                     ShowServicesCommand.Execute(services, countToShow);
                     break;
                 default:
-                    Console.WriteLine("\n" + "Неизвестная команда");
+                    Console.WriteLine();
+                    Console.WriteLine("Неизвестная команда");
                     break;
             };
 
@@ -100,8 +105,7 @@ namespace Eshop
 
         private static void AddSampleServices(int countSamples = 10)
         {
-            Random random = new Random();
-
+            
             services.Add(new Service(0, "Замена экрана", 5000, categories[0]));
             services.Add(new Service(1, "Замена экрана", 10_000, categories[2]));
             services.Add(new Service(2, "Ремеонт батареии", 3000, categories[0]));
@@ -114,7 +118,7 @@ namespace Eshop
         {
             var parameter = "";
 
-            var commandCompound = command.Split(' ');
+            var commandCompound = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (commandCompound.Length >= parameterNumber)
             {
                 int parameterIndex = parameterNumber - 1;
@@ -122,13 +126,6 @@ namespace Eshop
             }
 
             return parameter;
-        }
-
-        private static void Init()
-        {
-            products = new List<Product>();
-            services = new List<Service>();
-            categories = new List<ProductCategory>();
         }
 
     }

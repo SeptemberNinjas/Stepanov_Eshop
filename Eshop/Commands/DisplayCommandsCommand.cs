@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Eshop.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Eshop.Commands
 {
     internal class DisplayCommandsCommand
     {
-        public const string Name = "команды";
+        public const string Name = "Команды";
 
         public static string GetInfo()
         {
