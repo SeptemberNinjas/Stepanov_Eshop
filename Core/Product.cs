@@ -3,11 +3,17 @@ namespace Eshop.Core
 {
     public class Product
     {
-        public int Id;
-        public string Name;
-        public decimal Price;
-        public int Stock;
-        public ProductCategory Category;
+        public int Id { get; init; }
+        public string Name { get; }
+        public decimal Price { get; }
+
+        private int stock;
+        public int Stock
+        {
+            get => stock;
+            set => stock = value < 0 ? 0: value;
+        }
+        public ProductCategory Category { get; }
 
         public Product(int id, string name, decimal price, int stock, ProductCategory category)
         {

@@ -8,12 +8,12 @@ namespace Eshop.Core
 {
     public class Service
     {
-        public int Id;
-        public string Name;
-        public double Price;
-        
+        public int Id { get; init; }
+        public string Name { get; }
+        public decimal Price { get; }
+
         public ProductCategory Category;
-        public Service(int id, string name, double price, ProductCategory category)
+        public Service(int id, string name, decimal price, ProductCategory category)
         {
             Id = id;
             Name = name;
