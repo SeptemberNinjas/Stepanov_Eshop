@@ -28,11 +28,11 @@ namespace Eshop.Commands
             
             foreach (var cartItem in cart.Items)
             {
-                decimal currentCost = cartItem.getItemPrice() * cartItem.Count;
+                decimal currentCost = cartItem.GetItemPrice() * cartItem.Count;
                 carItemsToShow.AppendLine($"{cartItem.Text} Цена за {cartItem.Count} шт: {currentCost}");  
             }
 
-            carItemsToShow.AppendLine($"Общая сумма: {cart.getCartTotalPrice()}");
+            carItemsToShow.AppendLine($"Общая сумма: {cart.GetCartTotalPrice()}");
 
             return carItemsToShow.ToString();
 

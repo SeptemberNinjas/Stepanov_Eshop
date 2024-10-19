@@ -22,6 +22,11 @@ namespace Eshop.Commands
                 $"{Name} - {GetInfo()}",
                 $"{ShowProductsCommand.Name} - {ShowProductsCommand.GetInfo()}",
                 $"{ShowServicesCommand.Name} - {ShowServicesCommand.GetInfo()}",
+                $"{AddItemToCartCommand.Name} - {AddItemToCartCommand.GetInfo()}",
+                $"{ShowCartCommand.Name} - {ShowCartCommand.GetInfo()}",
+                $"{EmptyCartCommand.Name} - {EmptyCartCommand.GetInfo()}",
+                $"{MakeOrderCommand.Name} - {MakeOrderCommand.GetInfo()}",
+                $"{ShowOrdersCommand.Name} - {ShowOrdersCommand.GetInfo()}",
                 $"{ExitCommand.Name} - {ExitCommand.GetInfo()}"
             };
 

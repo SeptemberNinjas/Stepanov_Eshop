@@ -14,14 +14,14 @@ namespace Core
         private int _count;
         public int ItemID => (_product?.Id ?? _service?.Id) ?? throw new();
         public ItemType itemType => _product != null ? ItemType.Product : ItemType.Service;
-        public string Text => $"{(_product?.Name ?? _service?.Name)} {Count}";
+        public string Text => $"{(_product?.Name ?? _service?.Name)} Количество: {Count} шт.";
 
         public int Count
         {
             get { return _count; }
             set
             {
-                if (_service is not null || value < 1)
+                if (value < 1)
                     return;
                 
                 _count = value;
@@ -41,7 +41,7 @@ namespace Core
             Count = 1;
         }
 
-        public decimal getItemPrice()
+        public decimal GetItemPrice()
         {
  
             return _product != null ? _product.Price : _service.Price;

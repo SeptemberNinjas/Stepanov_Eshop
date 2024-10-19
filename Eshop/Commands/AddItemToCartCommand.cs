@@ -14,7 +14,8 @@ namespace Eshop.Commands
 
         public static string GetInfo()
         {
-            return "Добавление товара/ услуги в корзину. После команды укажите ID товара/ услуги для добавления и, если необходимо, количество товара (минимум 1).";
+            return "Добавление товара/ услуги в корзину. После команды укажите добавляемый тип - \"Товар\" или \"Услуга\", " +
+                   "\nID товара/ услуги для добавления и, если необходимо, количество товара (минимум 1).";
         }
 
         public static string Execute(Cart? cart, List<Product> products, string[]? args)
@@ -23,11 +24,11 @@ namespace Eshop.Commands
                 return "Проблемы с корзиной";
 
             var itemId = 0;
-            if (args == null || !int.TryParse(args[0], out itemId) || itemId <= 0)
+            if (args == null || !int.TryParse(args[1], out itemId) || itemId <= 0)
                 return "Некорректно передан Id";
 
             var countToAdd = 0;
-            if (args == null || args.Length < 2 || !int.TryParse(args[1], out itemId) || itemId <= 0)
+            if (args == null || args.Length < 3 || !int.TryParse(args[2], out countToAdd) || countToAdd <= 0)
                 countToAdd = 1;
 
             Product? foundProduct = null;
@@ -53,7 +54,7 @@ namespace Eshop.Commands
                 return "Проблемы с корзиной";
 
             var itemId = 0;
-            if (args == null || !int.TryParse(args[0], out itemId) || itemId <= 0)
+            if (args == null || !int.TryParse(args[1], out itemId) || itemId <= 0)
                 return "Некорректно передан Id";
 
             Service? foundService = null;

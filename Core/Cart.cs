@@ -9,7 +9,7 @@ namespace Core
 {
     public class Cart
     {
-        private readonly List<CartItem> _items;
+        private readonly List<CartItem> _items = new List<CartItem>();
         public List<CartItem> Items => _items;
         public string AddItem(Product product, int count)
         {
@@ -20,24 +20,74 @@ namespace Core
                 return "Не хватает товара";
 
             product.Stock -= count;
-            CartItem cartItem = new CartItem(product, count);
-            _items.Add(cartItem);
+
+            CartItem foundedItem = null;
+            var itemAlreadyAdded = ItemAlreadyAdded(product.Id, ItemType.Product, out foundedItem);
+
+            if (itemAlreadyAdded && foundedItem != null)
+            {
+                foundedItem.Count += count;
+
+            } else
+            {
+                CartItem cartItem = new CartItem(product, count);
+                _items.Add(cartItem);
+            }
 
             return "Товар успешно добавлен в корзину";
         }
 
         public string AddItem(Service service)
         {
-            CartItem cartItem = new CartItem(service);
-            _items.Add(cartItem);
+            var answerText = "";
 
-            return "Услуга успешно добавлена в корзину";
+            CartItem foundedItem = null;
+            var itemAlreadyAdded = ItemAlreadyAdded(service.Id, ItemType.Service, out foundedItem);
+
+            if (itemAlreadyAdded)
+            {
+                answerText = "Услуга уже добавлена в корзину";
+
+            } else
+            {
+                CartItem cartItem = new CartItem(service);
+                _items.Add(cartItem);
+                answerText = "Услуга успешно добавлена в корзину";
+            }
+
+            return answerText;
         }
-        public decimal getCartTotalPrice()
+
+        public Boolean ItemAlreadyAdded(int itemID, ItemType itemType, out CartItem? foundedItem)
+        {
+            var alreadyExist = false;
+            foundedItem = null;
+            foreach (var item in _items)
+            {
+                if (item.itemType != itemType)
+                    continue;
+
+                if (item.ItemID == itemID)
+                {
+                    alreadyExist = true;
+                    foundedItem = item;
+                    break;
+                }
+            }
+
+            return alreadyExist;
+        }
+
+        public string EmptyCart()
+        {
+            _items.Clear();
+            return "Корзина очищена";
+        }
+        public decimal GetCartTotalPrice()
         {
             decimal totalPrice = 0;
             foreach (var item in _items)
-                totalPrice += item.getItemPrice() * item.Count;
+                totalPrice += item.GetItemPrice() * item.Count;
 
             return totalPrice;
         }

@@ -1,4 +1,5 @@
-﻿using Eshop.Commands;
+﻿using Core;
+using Eshop.Commands;
 using Eshop.Core;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace Eshop
         private readonly List<Product> products = new List<Product>();
         private readonly List<Service> services = new List<Service>();
         private readonly List<ProductCategory> categories = new List<ProductCategory>();
+        private Cart cart = new Cart();
+        private List<Order> orders = new List<Order>();
+        private int orderIndex = 0;
 
         public ApplicationContext()
         {
@@ -45,6 +49,24 @@ namespace Eshop
                     break;
                 case ShowServicesCommand.Name:
                     commantToExecute = ShowServicesCommand.Execute(services, args);
+                    break;
+                case AddItemToCartCommand.Name:
+                    if (args != null && args.Length >= 1 && args[0] == "Товар")
+                        commantToExecute = AddItemToCartCommand.Execute(cart, products, args);
+                    else
+                        commantToExecute = AddItemToCartCommand.Execute(cart, services, args);
+                    break;
+                case ShowCartCommand.Name:
+                    commantToExecute = ShowCartCommand.Execute(cart, args);
+                    break;
+                case EmptyCartCommand.Name:
+                    commantToExecute = EmptyCartCommand.Execute(cart, args);
+                    break;
+                case MakeOrderCommand.Name:
+                    commantToExecute = MakeOrderCommand.Execute(orders, cart, ++orderIndex, args);
+                    break;
+                case ShowOrdersCommand.Name:
+                    commantToExecute = ShowOrdersCommand.Execute(orders, args);
                     break;
                 default:
                     commantToExecute = "Неизвестная команда";

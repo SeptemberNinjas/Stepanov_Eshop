@@ -26,7 +26,7 @@ namespace Eshop.Core
 
         public override string? ToString()
         {
-            return $"Товар: {Name}.\nКатегория: {Category}.\nСтоимость: {Price}.";
+            return $"ID: {Id} Товар: {Name}.\nКатегория: {Category}.\nСтоимость: {Price}.\nКоличество: {Stock}";
         }
     }
 }
