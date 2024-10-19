@@ -9,8 +9,8 @@ namespace Eshop.Core
 {
     public class ProductCategory
     {
-        public int Id;
-        public string Name;
+        public int Id { get; init; }
+        public string Name { get; }
         public ProductCategory(int id, string name)
         {
             Id = id;

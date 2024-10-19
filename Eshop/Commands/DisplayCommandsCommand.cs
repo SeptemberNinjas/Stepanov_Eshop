@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Eshop.Commands
 {
-    internal class DisplayCommandsCommand
+    internal static class DisplayCommandsCommand
     {
         public const string Name = "Команды";
 
@@ -16,12 +16,22 @@ namespace Eshop.Commands
             return "Список команд.";
         }
 
-        public static void Execute()
+        public static string Execute()
         {
-            Console.WriteLine($"{Name} - {GetInfo()}");
-            Console.WriteLine($"{ShowProductsCommand.Name} - {ShowProductsCommand.GetInfo()}");
-            Console.WriteLine($"{ShowServicesCommand.Name} - {ShowServicesCommand.GetInfo()}");
-            Console.WriteLine($"{ExitCommand.Name} - {ExitCommand.GetInfo()}");
+            var strings = new string[] {
+                $"{Name} - {GetInfo()}",
+                $"{ShowProductsCommand.Name} - {ShowProductsCommand.GetInfo()}",
+                $"{ShowServicesCommand.Name} - {ShowServicesCommand.GetInfo()}",
+                $"{AddItemToCartCommand.Name} - {AddItemToCartCommand.GetInfo()}",
+                $"{ShowCartCommand.Name} - {ShowCartCommand.GetInfo()}",
+                $"{EmptyCartCommand.Name} - {EmptyCartCommand.GetInfo()}",
+                $"{MakeOrderCommand.Name} - {MakeOrderCommand.GetInfo()}",
+                $"{ShowOrdersCommand.Name} - {ShowOrdersCommand.GetInfo()}",
+                $"{ExitCommand.Name} - {ExitCommand.GetInfo()}"
+            };
+
+            return string.Join(Environment.NewLine, strings);
+
         }
     }
 }
