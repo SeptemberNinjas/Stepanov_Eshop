@@ -112,7 +112,7 @@ namespace Eshop
                 var price = random.Next(100, 2000) * 100;
                 var stock = random.Next(101);
 
-                products.Add(new Product(i, productName, price, stock, category));
+                products.Add(new Product(i, productName, price, category, stock));
             }
         }
 

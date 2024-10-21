@@ -9,8 +9,8 @@ namespace Core
 {
     public class Cart
     {
-        private readonly List<CartItem> _items = new List<CartItem>();
-        public List<CartItem> Items => _items;
+        private readonly List<ItemsListLine<SaleItem>> _items = new List<ItemsListLine<SaleItem>>();
+        public List<ItemsListLine<SaleItem>> Items => _items;
         public string AddItem(Product product, int count)
         {
             if (count < 1)
@@ -21,18 +21,13 @@ namespace Core
 
             product.Stock -= count;
 
-            CartItem foundedItem = null;
+            ItemsListLineSaleItem? foundedItem;
             var itemAlreadyAdded = ItemAlreadyAdded(product.Id, ItemType.Product, out foundedItem);
 
             if (itemAlreadyAdded && foundedItem != null)
-            {
                 foundedItem.Count += count;
-
-            } else
-            {
-                CartItem cartItem = new CartItem(product, count);
-                _items.Add(cartItem);
-            }
+            else
+                _items.Add(new ItemsListLineSaleItem(product, count));
 
             return "Товар успешно добавлен в корзину";
         }
@@ -41,24 +36,23 @@ namespace Core
         {
             var answerText = "";
 
-            CartItem foundedItem = null;
+            ItemsListLineSaleItem? foundedItem;
             var itemAlreadyAdded = ItemAlreadyAdded(service.Id, ItemType.Service, out foundedItem);
 
-            if (itemAlreadyAdded)
+            if (itemAlreadyAdded && service.OnlyOneItem)
             {
                 answerText = "Услуга уже добавлена в корзину";
 
             } else
             {
-                CartItem cartItem = new CartItem(service);
-                _items.Add(cartItem);
+                _items.Add(new ItemsListLineSaleItem(service));
                 answerText = "Услуга успешно добавлена в корзину";
             }
 
             return answerText;
         }
 
-        public Boolean ItemAlreadyAdded(int itemID, ItemType itemType, out CartItem? foundedItem)
+        public Boolean ItemAlreadyAdded(int itemID, ItemType itemType, out ItemsListLineSaleItem? foundedItem)
         {
             var alreadyExist = false;
             foundedItem = null;
@@ -70,7 +64,7 @@ namespace Core
                 if (item.ItemID == itemID)
                 {
                     alreadyExist = true;
-                    foundedItem = item;
+                    foundedItem = (ItemsListLineSaleItem)item;
                     break;
                 }
             }

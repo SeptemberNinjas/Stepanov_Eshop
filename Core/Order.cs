@@ -10,12 +10,12 @@ namespace Core
     public class Order
     {
         public int Id { get; init; }
-        private readonly List<CartItem> _items;
-        public List<CartItem> Items => _items;
-        public Order(int id, List<CartItem> items)
+        private readonly List<ItemsListLine<SaleItem>> _items;
+        public List<ItemsListLine<SaleItem>> Items => _items;
+        public Order(int id, List<ItemsListLine<SaleItem>> items)
         {
             Id = id;
-            _items = new List<CartItem>(items);
+            _items = new List<ItemsListLine<SaleItem>>(items);
         }
     }
 }

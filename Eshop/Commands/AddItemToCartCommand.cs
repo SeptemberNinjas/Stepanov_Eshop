@@ -31,17 +31,9 @@ namespace Eshop.Commands
             if (args == null || args.Length < 3 || !int.TryParse(args[2], out countToAdd) || countToAdd <= 0)
                 countToAdd = 1;
 
-            Product? foundProduct = null;
-            foreach (var product in products)
-            {
-                if (product.Id == itemId)
-                {
-                    foundProduct = product;
-                    break;
-                }
-            }
-
-            if (foundProduct == null) 
+            Product foundProduct;
+            var itemFounded = TryGetItem(itemId, products, out foundProduct);
+            if (!itemFounded) 
                 return "Товар под таким id не найден";
 
             return cart.AddItem(foundProduct, countToAdd);
@@ -57,22 +49,31 @@ namespace Eshop.Commands
             if (args == null || !int.TryParse(args[1], out itemId) || itemId <= 0)
                 return "Некорректно передан Id";
 
-            Service? foundService = null;
-            foreach (var service in services)
-            {
-                if (service.Id == itemId)
-                {
-                    foundService = service;
-                    break;
-                }
-            }
+            Service foundService;
+            var itemFounded = TryGetItem(itemId, services, out foundService);
 
-            if (foundService == null)
+            if (!itemFounded)
                 return "Услуга под таким id не найдена";
 
             return cart.AddItem(foundService);
 
         }
+
+        private static bool TryGetItem<T>(int id, IEnumerable<T> items, out T item) where T : SaleItem
+        {
+            foreach (var saleItem in items)
+            {
+                if (saleItem.Id != id)
+                    continue;
+                item = saleItem;
+                return true;
+            }
+
+            item = null!;
+            return false;
+
+        }
+
 
     }
 }

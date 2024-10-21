@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,24 +7,19 @@ using System.Threading.Tasks;
 
 namespace Eshop.Core
 {
-    public class Service
+    public class Service : SaleItem
     {
-        public int Id { get; init; }
-        public string Name { get; }
-        public decimal Price { get; }
-
-        public ProductCategory Category;
-        public Service(int id, string name, decimal price, ProductCategory category)
+        public Service(int id, string name, decimal price, ProductCategory category) : base(id, name, price, category)
         {
-            Id = id;
-            Name = name;
-            Price = price;
-            Category = category;
         }
+        public override ItemType Type => ItemType.Service;
 
         public override string? ToString()
         {
             return $"Услуга: {Name}. Стоимость: {Price}. Доступно для товаров категории: {Category}";
         }
+
+        public override bool OnlyOneItem => true;
+
     }
 }
