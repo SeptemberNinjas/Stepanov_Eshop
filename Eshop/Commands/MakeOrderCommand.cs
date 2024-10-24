@@ -21,7 +21,7 @@ namespace Eshop.Commands
             if (cart.Items.Count == 0) 
                 return "Корзина пуста. Заказ не сформирован";
 
-            orders.Add(new Order(orderId, cart.Items));
+            orders.Add(new Order(orderId, cart.Items, cart.GetCartTotalCost()));
             
             cart.EmptyCart();
             

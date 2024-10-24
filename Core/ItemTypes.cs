@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    public enum ItemType
+    public enum ItemTypes
     {
         Product,
         Service

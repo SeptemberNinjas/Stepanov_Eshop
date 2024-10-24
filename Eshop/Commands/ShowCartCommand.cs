@@ -32,7 +32,7 @@ namespace Eshop.Commands
                 carItemsToShow.AppendLine($"{cartItem.Text} Цена за {cartItem.Count} шт: {currentCost}");  
             }
 
-            carItemsToShow.AppendLine($"Общая сумма: {cart.GetCartTotalPrice()}");
+            carItemsToShow.AppendLine($"Общая сумма: {cart.GetCartTotalCost()}");
 
             return carItemsToShow.ToString();
 

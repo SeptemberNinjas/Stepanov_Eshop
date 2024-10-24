@@ -22,7 +22,7 @@ namespace Core
             product.Stock -= count;
 
             ItemsListLineSaleItem? foundedItem;
-            var itemAlreadyAdded = ItemAlreadyAdded(product.Id, ItemType.Product, out foundedItem);
+            var itemAlreadyAdded = ItemAlreadyAdded(product.Id, ItemTypes.Product, out foundedItem);
 
             if (itemAlreadyAdded && foundedItem != null)
                 foundedItem.Count += count;
@@ -37,7 +37,7 @@ namespace Core
             var answerText = "";
 
             ItemsListLineSaleItem? foundedItem;
-            var itemAlreadyAdded = ItemAlreadyAdded(service.Id, ItemType.Service, out foundedItem);
+            var itemAlreadyAdded = ItemAlreadyAdded(service.Id, ItemTypes.Service, out foundedItem);
 
             if (itemAlreadyAdded && service.OnlyOneItem)
             {
@@ -52,7 +52,7 @@ namespace Core
             return answerText;
         }
 
-        public Boolean ItemAlreadyAdded(int itemID, ItemType itemType, out ItemsListLineSaleItem? foundedItem)
+        public Boolean ItemAlreadyAdded(int itemID, ItemTypes itemType, out ItemsListLineSaleItem? foundedItem)
         {
             var alreadyExist = false;
             foundedItem = null;
@@ -77,13 +77,13 @@ namespace Core
             _items.Clear();
             return "Корзина очищена";
         }
-        public decimal GetCartTotalPrice()
+        public decimal GetCartTotalCost()
         {
-            decimal totalPrice = 0;
+            decimal totalCost = 0;
             foreach (var item in _items)
-                totalPrice += item.GetItemPrice() * item.Count;
+                totalCost += item.GetItemPrice() * item.Count;
 
-            return totalPrice;
+            return totalCost;
         }
     }
 }

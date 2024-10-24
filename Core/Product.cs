@@ -19,7 +19,7 @@ namespace Eshop.Core
         }
 
 
-        public override ItemType Type => ItemType.Product;
+        public override ItemTypes Type => ItemTypes.Product;
 
         public override string? ToString()
         {

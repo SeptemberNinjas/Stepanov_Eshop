@@ -29,7 +29,9 @@ namespace Eshop.Commands
                 {
                     ordersToShow.AppendLine(item.Text);
                 }
-                
+
+                ordersToShow.AppendLine($"Стоимость заказа: {order.Cost}");
+
                 ordersToShow.AppendLine();
 
             }

@@ -14,7 +14,7 @@ namespace Core
         public decimal Price { get; }
 
         public ProductCategory Category { get; }
-        public abstract ItemType Type { get; }
+        public abstract ItemTypes Type { get; }
 
         protected SaleItem(int id, string name, decimal price, ProductCategory category)
         {

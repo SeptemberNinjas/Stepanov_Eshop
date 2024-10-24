@@ -12,7 +12,7 @@ namespace Eshop.Core
         public Service(int id, string name, decimal price, ProductCategory category) : base(id, name, price, category)
         {
         }
-        public override ItemType Type => ItemType.Service;
+        public override ItemTypes Type => ItemTypes.Service;
 
         public override string? ToString()
         {

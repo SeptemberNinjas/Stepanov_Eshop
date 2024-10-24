@@ -11,7 +11,7 @@ namespace Core
     {
         private readonly T _lineItem;
         public int ItemID => _lineItem.Id;
-        public ItemType itemType => _lineItem.Type;
+        public ItemTypes itemType => _lineItem.Type;
         public string Text => $"{_lineItem.Name} Количество: {Count} шт.";
 
         public int Count { get; set; }
