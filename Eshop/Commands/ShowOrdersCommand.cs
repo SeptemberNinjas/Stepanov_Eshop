@@ -23,18 +23,7 @@ namespace Eshop.Commands
 
             var ordersToShow = new StringBuilder();
             foreach (var order in orders)
-            {
-                ordersToShow.AppendLine($"Заказ {order.Id} включает {order.Items.Count} товар(ов)/ услуг:");
-                foreach (var item in order.Items) 
-                {
-                    ordersToShow.AppendLine(item.Text);
-                }
-
-                ordersToShow.AppendLine($"Стоимость заказа: {order.Cost}");
-
-                ordersToShow.AppendLine();
-
-            }
+                ordersToShow.AppendLine(order.ToString());
 
             return ordersToShow.ToString();
 

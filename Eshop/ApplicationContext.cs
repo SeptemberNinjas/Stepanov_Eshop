@@ -19,6 +19,8 @@ namespace Eshop
         private Cart cart = new Cart();
         private List<Order> orders = new List<Order>();
         private int orderIndex = 0;
+        private List<PaymentCheck> paymentChecks = new List<PaymentCheck>();
+        private int paymentId = 0;
 
         public ApplicationContext()
         {
@@ -75,20 +77,6 @@ namespace Eshop
 
             return commantToExecute;
 
-        }
-
-        private static string GetParameterFromCommand(string command, int parameterNumber)
-        {
-            var parameter = "";
-
-            var commandCompound = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (commandCompound.Length >= parameterNumber)
-            {
-                int parameterIndex = parameterNumber - 1;
-                parameter = commandCompound[parameterIndex];
-            }
-
-            return parameter;
         }
 
         private void AddSampleCategories()
