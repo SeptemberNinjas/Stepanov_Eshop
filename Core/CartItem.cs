@@ -12,10 +12,25 @@ namespace Core
         private readonly Product? _product;
         private readonly Service? _service;
         private int _count;
+        
+        /// <summary>
+        /// ID линии
+        /// </summary>
         public int ItemID => (_product?.Id ?? _service?.Id) ?? throw new();
+        
+        /// <summary>
+        /// Тип торговой единицы
+        /// </summary>
         public ItemType itemType => _product != null ? ItemType.Product : ItemType.Service;
+        
+        /// <summary>
+        /// Представление торговой единицы
+        /// </summary>
         public string Text => $"{(_product?.Name ?? _service?.Name)} Количество: {Count} шт.";
 
+        /// <summary>
+        /// Колиество единиц
+        /// </summary>
         public int Count
         {
             get { return _count; }
@@ -41,6 +56,10 @@ namespace Core
             Count = 1;
         }
 
+        /// <summary>
+        /// Получение стоимости линии
+        /// </summary>
+        /// <returns></returns>
         public decimal GetItemPrice()
         {
  

@@ -6,13 +6,33 @@ using System.Threading.Tasks;
 
 namespace Eshop.Core
 {
+    /// <summary>
+    /// Услуга
+    /// </summary>
     public class Service
     {
+
+        /// <summary>
+        /// ID услуги
+        /// </summary>
         public int Id { get; init; }
+        
+        /// <summary>
+        /// Наименование
+        /// </summary>
         public string Name { get; }
+        
+        /// <summary>
+        /// Цана
+        /// </summary>
         public decimal Price { get; }
 
+        
+        /// <summary>
+        /// Категория
+        /// </summary>
         public ProductCategory Category;
+        
         public Service(int id, string name, decimal price, ProductCategory category)
         {
             Id = id;
