@@ -28,9 +28,13 @@ namespace Eshop.Commands
             PaymentCheck paymentCheck = new(paymentId, paymentType, order.Id, order.Cost);
 
             decimal change = 0;
-            paymentCheck.Pay(order, decimal.Parse(args[2]), out change);
+            var message = "";
+            var orderIsPaid = paymentCheck.Pay(order, decimal.Parse(args[2]), out change, out message);
 
-            return "Заказ сформирован";
+            if (orderIsPaid)            
+                paymentChecks.Add(paymentCheck);
+
+            return message;
         }
     }
 }

@@ -20,21 +20,25 @@ namespace Core
             OrderID = orderID;
             PaymentAmount = paymentAmount;
         }
-        public string Pay(Order order, decimal paymentAmount, out decimal change)
+        public bool Pay(Order order, decimal paymentAmount, out decimal change, out string message)
         {
             change = 0;
 
             if (paymentAmount < this.PaymentAmount)
             {
-                return "Недостаточно средств для оплаты.";
+                message = "Недостаточно средств для оплаты.";
+                return false;
             }
 
-            change = this.PaymentAmount - paymentAmount;
+            change = paymentAmount - this.PaymentAmount;
             IsCompleted = true;
 
             order.Status = OrderStatuses.paidOrder;
+            order.PaymentCheckId = this.Id;
 
-            return "Заказ оплачен.";
+            message = "Заказ оплачен." + ((change != 0) ? $"Ваша сдача: {change}" : "");
+
+            return true;
         }
     }
 }

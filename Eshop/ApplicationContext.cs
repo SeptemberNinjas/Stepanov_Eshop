@@ -70,12 +70,39 @@ namespace Eshop
                 case ShowOrdersCommand.Name:
                     commantToExecute = ShowOrdersCommand.Execute(orders, args);
                     break;
+                case PayOrderCommand.Name:
+                    if (args != null && args.Length >= 3)
+                    {
+                        int orderIDToSeek = int.Parse(args[0]);
+                        Order foundOrder = FindOrderByID(orderIDToSeek);
+                        commantToExecute = PayOrderCommand.Execute(paymentChecks, paymentId, foundOrder, args);
+                    }
+                    else
+                    {
+                        commantToExecute = "Неправильно переданы параметры команды";
+                    }                    
+                    
+                    break;
+
                 default:
                     commantToExecute = "Неизвестная команда";
                     break;
             };
 
             return commantToExecute;
+
+        }
+
+        private Order FindOrderByID(int orderId)
+        {            
+            
+            foreach (var order in orders)
+            {
+                if (order.Id == orderId)
+                    return order;                
+            }
+
+            return null;
 
         }
 

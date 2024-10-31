@@ -27,6 +27,7 @@ namespace Eshop.Commands
                 $"{EmptyCartCommand.Name} - {EmptyCartCommand.GetInfo()}",
                 $"{MakeOrderCommand.Name} - {MakeOrderCommand.GetInfo()}",
                 $"{ShowOrdersCommand.Name} - {ShowOrdersCommand.GetInfo()}",
+                $"{PayOrderCommand.Name} - {PayOrderCommand.GetInfo()}",
                 $"{ExitCommand.Name} - {ExitCommand.GetInfo()}"
             };
 

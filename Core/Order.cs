@@ -14,7 +14,8 @@ namespace Core
         public OrderStatuses Status { get; set; }
 
         private readonly List<ItemsListLine<SaleItem>> _items;
-        public List<ItemsListLine<SaleItem>> Items => _items;        
+        public List<ItemsListLine<SaleItem>> Items => _items;          
+        public int PaymentCheckId { get; set; }
         public Order(int id, List<ItemsListLine<SaleItem>> items, decimal cost)
         {
             Id = id;
