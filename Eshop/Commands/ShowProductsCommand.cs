@@ -16,16 +16,22 @@ namespace Eshop.Commands
             return "Список товаров. Опционально можно указать количество выводимых товаров.";
         }
 
-        public static void Execute(List<Product> products, int count = 0)
+        public static string Execute(List<Product> products, string[]? args)
         {
-            var countToShow = (count <= 0 || count > products.Count) ? products.Count : count;
-
-            for (var i = 0; i < countToShow; i++)
+            var countToShow = 0;
+            if (args == null || !int.TryParse(args[0], out countToShow) || countToShow <= 0 || countToShow > products.Count)
             {
-                Console.WriteLine(products[i]);
-                Console.WriteLine();
-            }
-                
+                countToShow = products.Count;
+            };
+
+            var produtcsToShow = new StringBuilder();
+
+            for (var i = 0; i < countToShow; i++)                
+                produtcsToShow.AppendLine(products[i].ToString());
+
+            return produtcsToShow.ToString();
+
+
         }
 
     }

@@ -9,8 +9,16 @@ namespace Eshop.Core
 {
     public class ProductCategory
     {
-        public int Id;
-        public string Name;
+        /// <summary>
+        /// ID категории товара
+        /// </summary>
+        public int Id { get; init; }
+
+        /// <summary>
+        /// Имя категории
+        /// </summary>
+        public string Name { get; }
+       
         public ProductCategory(int id, string name)
         {
             Id = id;

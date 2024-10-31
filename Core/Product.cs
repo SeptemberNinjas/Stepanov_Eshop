@@ -1,13 +1,41 @@
 ﻿
 namespace Eshop.Core
 {
+    /// <summary>
+    /// Товар
+    /// </summary>
     public class Product
     {
-        public int Id;
-        public string Name;
-        public decimal Price;
-        public int Stock;
-        public ProductCategory Category;
+        /// <summary>
+        /// ID товара
+        /// </summary>
+        public int Id { get; init; }
+        
+        /// <summary>
+        /// Имя товара
+        /// </summary>
+        public string Name { get; }
+        
+        /// <summary>
+        /// Цена товара
+        /// </summary>
+        public decimal Price { get; }
+
+        private int stock;
+        
+        /// <summary>
+        /// Количество
+        /// </summary>
+        public int Stock
+        {
+            get => stock;
+            set => stock = value < 0 ? 0: value;
+        }
+        
+        /// <summary>
+        /// Категория
+        /// </summary>
+        public ProductCategory Category { get; }
 
         public Product(int id, string name, decimal price, int stock, ProductCategory category)
         {
@@ -20,7 +48,7 @@ namespace Eshop.Core
 
         public override string? ToString()
         {
-            return $"Товар: {Name}.\nКатегория: {Category}.\nСтоимость: {Price}.";
+            return $"ID: {Id} Товар: {Name}.\nКатегория: {Category}.\nСтоимость: {Price}.\nКоличество: {Stock}";
         }
     }
 }

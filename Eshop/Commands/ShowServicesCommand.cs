@@ -16,12 +16,20 @@ namespace Eshop.Commands
             return "Список услуг. Опционально можно указать количество выводимых услуг.";
         }
 
-        public static void Execute(List<Service> services, int count = 0)
+        public static string Execute(List<Service> services, string[]? args)
         {
-            int countToShow = (count == 0 || count > services.Count()) ? services.Count() : count;
+            var countToShow = 0;
+            if (args == null || !int.TryParse(args[0], out countToShow) || countToShow <= 0 || countToShow > services.Count)
+            {
+                countToShow = services.Count;
+            };
+            
+            var servicesToShow = new StringBuilder();
 
             for (int i = 0; i < countToShow; i++)
-                Console.WriteLine(services[i] + "\n");
+                servicesToShow.AppendLine(services[i].ToString());
+            
+            return servicesToShow.ToString();
         }
     }
 }
