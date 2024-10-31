@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Статусы заказа
+    /// </summary>
     public enum OrderStatuses
     {
         newOrder,

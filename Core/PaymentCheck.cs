@@ -6,13 +6,35 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Оплата заказа
+    /// </summary>
     public class PaymentCheck
     {
+        /// <summary>
+        /// ID оплаты
+        /// </summary>
         public int Id { get; init; }
+        
+        /// <summary>
+        /// Тип оплаты
+        /// </summary>
         public PaymentTypes PaymentType { get; init; }
+        
+        /// <summary>
+        /// ID заказа
+        /// </summary>
         public int OrderID { get; init; }       
+        
+        /// <summary>
+        /// Сумма платежа
+        /// </summary>
         public decimal PaymentAmount { get; init; }
-        public Boolean IsCompleted { get; private set; }
+        
+        /// <summary>
+        /// Признак выполнения оплаты
+        /// </summary>
+        public bool IsCompleted { get; private set; }
         public PaymentCheck(int id, PaymentTypes paymentType, int orderID, decimal paymentAmount)
         {
             Id = id;
@@ -20,6 +42,15 @@ namespace Core
             OrderID = orderID;
             PaymentAmount = paymentAmount;
         }
+        
+        /// <summary>
+        /// Метод оплаты конкретного заказа на заданную сумму, возврат сдачи и сообщения
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="paymentAmount"></param>
+        /// <param name="change"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool Pay(Order order, decimal paymentAmount, out decimal change, out string message)
         {
             change = 0;

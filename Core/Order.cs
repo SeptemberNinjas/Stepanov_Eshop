@@ -7,14 +7,36 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Заказ
+    /// </summary>
     public class Order
     {
+        /// <summary>
+        /// ID заказа
+        /// </summary>
         public int Id { get; init; }
+        
+        /// <summary>
+        /// Стоимость заказа
+        /// </summary>
         public decimal Cost { get; init; }
+        
+        /// <summary>
+        /// Статус заказа
+        /// </summary>
         public OrderStatuses Status { get; set; }
 
         private readonly List<ItemsListLine<SaleItem>> _items;
+        
+        /// <summary>
+        /// Список торговых линий в заказе
+        /// </summary>
         public List<ItemsListLine<SaleItem>> Items => _items;          
+        
+        /// <summary>
+        /// ID документа об оплате (чека) заказа
+        /// </summary>
         public int PaymentCheckId { get; set; }
         public Order(int id, List<ItemsListLine<SaleItem>> items, decimal cost)
         {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Типы продукции
+    /// </summary>
     public enum ItemTypes
     {
         Product,

@@ -7,10 +7,24 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Корзина
+    /// </summary>
     public class Cart
     {
         private readonly List<ItemsListLine<SaleItem>> _items = new List<ItemsListLine<SaleItem>>();
+        
+        /// <summary>
+        /// Список торговых единиц в корзине
+        /// </summary>
         public List<ItemsListLine<SaleItem>> Items => _items;
+        
+        /// <summary>
+        /// Добавить товар в корзину в указанном количестве
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public string AddItem(Product product, int count)
         {
             if (count < 1)
@@ -22,9 +36,9 @@ namespace Core
             product.Stock -= count;
 
             ItemsListLineSaleItem? foundedItem;
-            var itemAlreadyAdded = ItemAlreadyAdded(product.Id, ItemTypes.Product, out foundedItem);
+            var itemFound = TryGetItem(product.Id, ItemTypes.Product, out foundedItem);
 
-            if (itemAlreadyAdded && foundedItem != null)
+            if (itemFound && foundedItem != null)
                 foundedItem.Count += count;
             else
                 _items.Add(new ItemsListLineSaleItem(product, count));
@@ -32,14 +46,19 @@ namespace Core
             return "Товар успешно добавлен в корзину";
         }
 
+        /// <summary>
+        /// Добавить услугу в корзину
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
         public string AddItem(Service service)
         {
             var answerText = "";
 
             ItemsListLineSaleItem? foundedItem;
-            var itemAlreadyAdded = ItemAlreadyAdded(service.Id, ItemTypes.Service, out foundedItem);
+            var itemFound = TryGetItem(service.Id, ItemTypes.Service, out foundedItem);
 
-            if (itemAlreadyAdded && service.OnlyOneItem)
+            if (itemFound && service.OnlyOneItem)
             {
                 answerText = "Услуга уже добавлена в корзину";
 
@@ -52,9 +71,16 @@ namespace Core
             return answerText;
         }
 
-        public Boolean ItemAlreadyAdded(int itemID, ItemTypes itemType, out ItemsListLineSaleItem? foundedItem)
+        /// <summary>
+        /// Проверка наличия торговой единицы в корзине
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <param name="itemType"></param>
+        /// <param name="foundedItem"></param>
+        /// <returns></returns>
+        public bool TryGetItem(int itemID, ItemTypes itemType, out ItemsListLineSaleItem? foundedItem)
         {
-            var alreadyExist = false;
+            var itemFound = false;
             foundedItem = null;
             foreach (var item in _items)
             {
@@ -63,20 +89,29 @@ namespace Core
 
                 if (item.ItemID == itemID)
                 {
-                    alreadyExist = true;
+                    itemFound = true;
                     foundedItem = (ItemsListLineSaleItem)item;
                     break;
                 }
             }
 
-            return alreadyExist;
+            return itemFound;
         }
 
+        /// <summary>
+        /// Очистка корзины
+        /// </summary>
+        /// <returns></returns>
         public string EmptyCart()
         {
             _items.Clear();
             return "Корзина очищена";
         }
+
+        /// <summary>
+        /// Общая стоимость всех торговых единиц в корзине
+        /// </summary>
+        /// <returns></returns>
         public decimal GetCartTotalCost()
         {
             decimal totalCost = 0;

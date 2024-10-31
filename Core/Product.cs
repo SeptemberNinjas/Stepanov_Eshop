@@ -3,9 +3,17 @@ using Core;
 
 namespace Eshop.Core
 {
+    /// <summary>
+    /// Товары
+    /// </summary>
     public class Product : SaleItem
     {
+
         private int stock;
+        
+        /// <summary>
+        /// Остаток
+        /// </summary>
         public int Stock
         {
             get => stock;
@@ -18,7 +26,9 @@ namespace Eshop.Core
 
         }
 
-
+        /// <summary>
+        /// Тип продукт
+        /// </summary>
         public override ItemTypes Type => ItemTypes.Product;
 
         public override string? ToString()

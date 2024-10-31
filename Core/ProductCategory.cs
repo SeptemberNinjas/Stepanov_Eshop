@@ -7,9 +7,19 @@ using System.Threading.Tasks;
 
 namespace Eshop.Core
 {
+    /// <summary>
+    /// Категории товаров/ услуг
+    /// </summary>
     public class ProductCategory
     {
+        /// <summary>
+        /// ID категории
+        /// </summary>
         public int Id { get; init; }
+        
+        /// <summary>
+        /// Имя категории
+        /// </summary>
         public string Name { get; }
         public ProductCategory(int id, string name)
         {

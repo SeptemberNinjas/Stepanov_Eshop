@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Типы оплаты
+    /// </summary>
     public enum PaymentTypes
     {
         cash,
