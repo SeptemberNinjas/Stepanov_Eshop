@@ -65,7 +65,7 @@ namespace Eshop
                     commantToExecute = EmptyCartCommand.Execute(cart, args);
                     break;
                 case MakeOrderCommand.Name:
-                    commantToExecute = MakeOrderCommand.Execute(orders, cart, ++orderIndex, args);
+                    commantToExecute = MakeOrderCommand.Execute(orders, cart, ref orderIndex, args);
                     break;
                 case ShowOrdersCommand.Name:
                     commantToExecute = ShowOrdersCommand.Execute(orders, args);
