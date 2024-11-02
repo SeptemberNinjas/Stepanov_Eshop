@@ -13,8 +13,8 @@ namespace Eshop
     {
         public const string Title = "Интернет-магазин";
 
-        private readonly List<Product> products = new List<Product>();
-        private readonly List<Service> services = new List<Service>();
+        private readonly IRepository<Product> products;
+        private readonly IRepository<Service> services;
         private readonly List<ProductCategory> categories = new List<ProductCategory>();
         private Cart cart = new Cart();
         private List<Order> orders = new List<Order>();
@@ -47,16 +47,16 @@ namespace Eshop
                     commandToExecute = ExitCommand.Execute();
                     break;
                 case ShowProductsCommand.Name:
-                    commandToExecute = ShowProductsCommand.Execute(products, args);
+                    commandToExecute = ShowProductsCommand.Execute(products.GetAll().ToList<Product>(), args);
                     break;
                 case ShowServicesCommand.Name:
-                    commandToExecute = ShowServicesCommand.Execute(services, args);
+                    commandToExecute = ShowServicesCommand.Execute(services.GetAll().ToList<Service>(), args);
                     break;
                 case AddItemToCartCommand.Name:
                     if (args != null && args.Length >= 1 && args[0] == "Товар")
-                        commandToExecute = AddItemToCartCommand.Execute(cart, products, args);
+                        commandToExecute = AddItemToCartCommand.Execute(cart, products.GetAll().ToList<Product>(), args);
                     else
-                        commandToExecute = AddItemToCartCommand.Execute(cart, services, args);
+                        commandToExecute = AddItemToCartCommand.Execute(cart, services.GetAll().ToList<Service>(), args);
                     break;
                 case ShowCartCommand.Name:
                     commandToExecute = ShowCartCommand.Execute(cart, args);
