@@ -21,7 +21,7 @@ namespace Core
         /// <summary>
         /// Тип торговой единицы
         /// </summary>
-        public ItemType itemType => _product != null ? ItemType.Product : ItemType.Service;
+        public ItemTypes itemType => _product != null ? ItemTypes.Product : ItemTypes.Service;
         
         /// <summary>
         /// Представление торговой единицы
