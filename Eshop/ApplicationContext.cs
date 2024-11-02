@@ -36,60 +36,60 @@ namespace Eshop
 
         public string ExecuteCommandByName(string command, string[]? args = null)
         {
-            var commantToExecute = "";
+            var commandToExecute = "";
 
             switch (command)
             {
                 case DisplayCommandsCommand.Name:
-                    commantToExecute = DisplayCommandsCommand.Execute();
+                    commandToExecute = DisplayCommandsCommand.Execute();
                     break;
                 case ExitCommand.Name:
-                    commantToExecute = ExitCommand.Execute();
+                    commandToExecute = ExitCommand.Execute();
                     break;
                 case ShowProductsCommand.Name:
-                    commantToExecute = ShowProductsCommand.Execute(products, args);
+                    commandToExecute = ShowProductsCommand.Execute(products, args);
                     break;
                 case ShowServicesCommand.Name:
-                    commantToExecute = ShowServicesCommand.Execute(services, args);
+                    commandToExecute = ShowServicesCommand.Execute(services, args);
                     break;
                 case AddItemToCartCommand.Name:
                     if (args != null && args.Length >= 1 && args[0] == "Товар")
-                        commantToExecute = AddItemToCartCommand.Execute(cart, products, args);
+                        commandToExecute = AddItemToCartCommand.Execute(cart, products, args);
                     else
-                        commantToExecute = AddItemToCartCommand.Execute(cart, services, args);
+                        commandToExecute = AddItemToCartCommand.Execute(cart, services, args);
                     break;
                 case ShowCartCommand.Name:
-                    commantToExecute = ShowCartCommand.Execute(cart, args);
+                    commandToExecute = ShowCartCommand.Execute(cart, args);
                     break;
                 case EmptyCartCommand.Name:
-                    commantToExecute = EmptyCartCommand.Execute(cart, args);
+                    commandToExecute = EmptyCartCommand.Execute(cart, args);
                     break;
                 case MakeOrderCommand.Name:
-                    commantToExecute = MakeOrderCommand.Execute(orders, cart, ref orderIndex, args);
+                    commandToExecute = MakeOrderCommand.Execute(orders, cart, ref orderIndex, args);
                     break;
                 case ShowOrdersCommand.Name:
-                    commantToExecute = ShowOrdersCommand.Execute(orders, args);
+                    commandToExecute = ShowOrdersCommand.Execute(orders, args);
                     break;
                 case PayOrderCommand.Name:
                     if (args != null && args.Length >= 3)
                     {
                         int orderIDToSeek = int.Parse(args[0]);
                         Order foundOrder = FindOrderByID(orderIDToSeek);
-                        commantToExecute = PayOrderCommand.Execute(paymentChecks, paymentId, foundOrder, args);
+                        commandToExecute = PayOrderCommand.Execute(paymentChecks, paymentId, foundOrder, args);
                     }
                     else
                     {
-                        commantToExecute = "Неправильно переданы параметры команды";
+                        commandToExecute = "Неправильно переданы параметры команды";
                     }                    
                     
                     break;
 
                 default:
-                    commantToExecute = "Неизвестная команда";
+                    commandToExecute = "Неизвестная команда";
                     break;
             };
 
-            return commantToExecute;
+            return commandToExecute;
 
         }
 
