@@ -55,6 +55,14 @@ namespace Eshop
                 args[1] = GetParameterFromCommand(command, 3);
                 args[2] = GetParameterFromCommand(command, 4);
             }
+            else if (commandToExecute.StartsWith(PayOrderCommand.Name)) 
+            {
+                args = new string[3];
+                commandToExecute = PayOrderCommand.Name;
+                args[0] = GetParameterFromCommand(command, 2);
+                args[1] = GetParameterFromCommand(command, 3);
+                args[2] = GetParameterFromCommand(command, 4);
+            }
 
             Console.WriteLine(_context.ExecuteCommandByName(commandToExecute, args));
 

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Core
 {
     /// <summary>
-    /// Типы торговой единицы
+    /// Статусы заказа
     /// </summary>
-    public enum ItemType
+    public enum OrderStatuses
     {
-        Product,
-        Service
+        newOrder,
+        paidOrder
     }
 }

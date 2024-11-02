@@ -12,15 +12,15 @@ namespace Core
     /// </summary>
     public class Cart
     {
-
+        private readonly List<ItemsListLine<SaleItem>> _items = new List<ItemsListLine<SaleItem>>();
+        
         /// <summary>
-        /// Список товаров в корзине
+        /// Список торговых единиц в корзине
         /// </summary>
-        private readonly List<CartItem> _items = new List<CartItem>();
-        public List<CartItem> Items => _items;
-
+        public List<ItemsListLine<SaleItem>> Items => _items;
+        
         /// <summary>
-        /// Добавление товара в корзину, переданного в параметрах в заданном количестве
+        /// Добавить товар в корзину в указанном количестве
         /// </summary>
         /// <param name="product"></param>
         /// <param name="count"></param>
@@ -35,24 +35,19 @@ namespace Core
 
             product.Stock -= count;
 
-            CartItem foundedItem = null;
-            var itemFound = TryGetItem(product.Id, ItemType.Product, out foundedItem);
+            ItemsListLineSaleItem? foundedItem;
+            var itemFound = TryGetItem(product.Id, ItemTypes.Product, out foundedItem);
 
             if (itemFound && foundedItem != null)
-            {
                 foundedItem.Count += count;
-
-            } else
-            {
-                CartItem cartItem = new CartItem(product, count);
-                _items.Add(cartItem);
-            }
+            else
+                _items.Add(new ItemsListLineSaleItem(product, count));
 
             return "Товар успешно добавлен в корзину";
         }
 
         /// <summary>
-        /// Добавление в корзину услуги
+        /// Добавить услугу в корзину
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
@@ -60,17 +55,16 @@ namespace Core
         {
             var answerText = "";
 
-            CartItem foundedItem = null;
-            var itemFound = TryGetItem(service.Id, ItemType.Service, out foundedItem);
+            ItemsListLineSaleItem? foundedItem;
+            var itemFound = TryGetItem(service.Id, ItemTypes.Service, out foundedItem);
 
-            if (itemFound)
+            if (itemFound && service.OnlyOneItem)
             {
                 answerText = "Услуга уже добавлена в корзину";
 
             } else
             {
-                CartItem cartItem = new CartItem(service);
-                _items.Add(cartItem);
+                _items.Add(new ItemsListLineSaleItem(service));
                 answerText = "Услуга успешно добавлена в корзину";
             }
 
@@ -78,13 +72,13 @@ namespace Core
         }
 
         /// <summary>
-        /// Проверка наличия товара в корзине
+        /// Проверка наличия торговой единицы в корзине
         /// </summary>
         /// <param name="itemID"></param>
         /// <param name="itemType"></param>
         /// <param name="foundedItem"></param>
         /// <returns></returns>
-        public bool TryGetItem(int itemID, ItemType itemType, out CartItem? foundedItem)
+        public bool TryGetItem(int itemID, ItemTypes itemType, out ItemsListLineSaleItem? foundedItem)
         {
             var itemFound = false;
             foundedItem = null;
@@ -96,7 +90,7 @@ namespace Core
                 if (item.ItemID == itemID)
                 {
                     itemFound = true;
-                    foundedItem = item;
+                    foundedItem = (ItemsListLineSaleItem)item;
                     break;
                 }
             }
@@ -115,16 +109,16 @@ namespace Core
         }
 
         /// <summary>
-        /// Получение общей стоимости товаров в корзине
+        /// Общая стоимость всех торговых единиц в корзине
         /// </summary>
         /// <returns></returns>
-        public decimal GetCartTotalPrice()
+        public decimal GetCartTotalCost()
         {
-            decimal totalPrice = 0;
+            decimal totalCost = 0;
             foreach (var item in _items)
-                totalPrice += item.GetItemPrice() * item.Count;
+                totalCost += item.GetItemPrice() * item.Count;
 
-            return totalPrice;
+            return totalCost;
         }
     }
 }

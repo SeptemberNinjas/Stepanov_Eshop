@@ -1,50 +1,35 @@
 ﻿
+using Core;
+
 namespace Eshop.Core
 {
     /// <summary>
-    /// Товар
+    /// Товары
     /// </summary>
-    public class Product
+    public class Product : SaleItem
     {
-        /// <summary>
-        /// ID товара
-        /// </summary>
-        public int Id { get; init; }
-        
-        /// <summary>
-        /// Имя товара
-        /// </summary>
-        public string Name { get; }
-        
-        /// <summary>
-        /// Цена товара
-        /// </summary>
-        public decimal Price { get; }
 
         private int stock;
         
         /// <summary>
-        /// Количество
+        /// Остаток
         /// </summary>
         public int Stock
         {
             get => stock;
-            set => stock = value < 0 ? 0: value;
+            set => stock = value < 0 ? 0 : value;
         }
-        
-        /// <summary>
-        /// Категория
-        /// </summary>
-        public ProductCategory Category { get; }
 
-        public Product(int id, string name, decimal price, int stock, ProductCategory category)
+        public Product(int id, string name, decimal price, ProductCategory category, int stock) : base(id, name, price, category)
         {
-            Id = id;
-            Name = name;
-            Price = price;
             Stock = stock;
-            Category = category;
+
         }
+
+        /// <summary>
+        /// Тип продукт
+        /// </summary>
+        public override ItemTypes Type => ItemTypes.Product;
 
         public override string? ToString()
         {

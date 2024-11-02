@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,41 +10,26 @@ namespace Eshop.Core
     /// <summary>
     /// Услуга
     /// </summary>
-    public class Service
+    public class Service : SaleItem
     {
-
-        /// <summary>
-        /// ID услуги
-        /// </summary>
-        public int Id { get; init; }
-        
-        /// <summary>
-        /// Наименование
-        /// </summary>
-        public string Name { get; }
-        
-        /// <summary>
-        /// Цана
-        /// </summary>
-        public decimal Price { get; }
-
-        
-        /// <summary>
-        /// Категория
-        /// </summary>
-        public ProductCategory Category;
-        
-        public Service(int id, string name, decimal price, ProductCategory category)
+        public Service(int id, string name, decimal price, ProductCategory category) : base(id, name, price, category)
         {
-            Id = id;
-            Name = name;
-            Price = price;
-            Category = category;
         }
+
+        /// <summary>
+        /// Тип - услуга
+        /// </summary>
+        public override ItemTypes Type => ItemTypes.Service;
 
         public override string? ToString()
         {
             return $"Услуга: {Name}. Стоимость: {Price}. Доступно для товаров категории: {Category}";
         }
+
+        /// <summary>
+        /// Признак, может ли в корзине быть несколько штук данной торговой единицы
+        /// </summary>
+        public override bool OnlyOneItem => true;
+
     }
 }

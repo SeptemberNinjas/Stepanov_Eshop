@@ -16,18 +16,49 @@ namespace Core
         /// ID заказа
         /// </summary>
         public int Id { get; init; }
-
-        private readonly List<CartItem> _items;
         
         /// <summary>
-        /// Список товаров в заказе
+        /// Стоимость заказа
         /// </summary>
-        public List<CartItem> Items => _items;
+        public decimal Cost { get; init; }
         
-        public Order(int id, List<CartItem> items)
+        /// <summary>
+        /// Статус заказа
+        /// </summary>
+        public OrderStatuses Status { get; set; }
+
+        private readonly List<ItemsListLine<SaleItem>> _items;
+        
+        /// <summary>
+        /// Список торговых линий в заказе
+        /// </summary>
+        public List<ItemsListLine<SaleItem>> Items => _items;          
+        
+        /// <summary>
+        /// ID документа об оплате (чека) заказа
+        /// </summary>
+        public int PaymentCheckId { get; set; }
+        public Order(int id, List<ItemsListLine<SaleItem>> items, decimal cost)
         {
             Id = id;
-            _items = new List<CartItem>(items);
+            _items = new List<ItemsListLine<SaleItem>>(items);
+            Cost = cost;
+            Status = OrderStatuses.newOrder;
+        }
+
+        public override string? ToString()
+        {
+            var orderInfo = new StringBuilder();
+            orderInfo.AppendLine($"Заказ {Id} включает {_items.Count} товар(ов)/ услуг:");
+            
+            foreach (var item in _items)
+                orderInfo.AppendLine(item.Text);
+
+            var statusToShow = (Status == OrderStatuses.newOrder) ? "Новый" : "Оплачен";
+            orderInfo.AppendLine($"Статус: {statusToShow}");
+            orderInfo.AppendLine($"Стоимость заказа: {Cost}");
+
+            return orderInfo.ToString();
         }
     }
 }
