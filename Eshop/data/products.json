@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Name": "Phone 1",
+    "Price": 17500,
+    "Stock": 3
+  },
+  {
+    "Id": 2,
+    "Name": "Phone 2",
+    "Price": 22000,
+    "Stock": 15
+  },
+  {
+    "Id": 3,
+    "Name": "Holod 3",
+    "Price": 35700,
+    "Stock": 10
+  }
+]
