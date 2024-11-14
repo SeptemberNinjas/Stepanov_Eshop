@@ -17,8 +17,9 @@ namespace Eshop
 
         private readonly IRepository<Product> _products;
         private readonly IRepository<Service> _services;
-        
-        private Cart cart = new Cart();
+        //private Cart _cart;
+        private IRepository<Cart> _cartRepository;
+
         private List<Order> orders = new List<Order>();
         private int orderIndex = 0;
         private List<PaymentCheck> paymentChecks = new List<PaymentCheck>();
@@ -28,11 +29,12 @@ namespace Eshop
 
         public ApplicationContext()
         {
-            //_repositoryFactory = new MemoryRepositoryFactory();
             _repositoryFactory = new JsonRepositoryFactory();
             _products = _repositoryFactory.CreateProductRepository();
             _services = _repositoryFactory.CreateServiceRepository();
- 
+            _cartRepository = _repositoryFactory.CreateCartRepository();
+            //_cart = _repositoryFactory.CreateCartRepository().GetByID(0) ?? new Cart();
+
         }
 
         public string ExecuteStartUpCommand()
@@ -43,6 +45,9 @@ namespace Eshop
         public string ExecuteCommandByName(string command, string[]? args = null)
         {
             var commandToExecute = "";
+
+            var _addItemToCartCommand = new AddItemToCartCommand(_cartRepository);
+            var _showCartCommand = new ShowCartCommand(_cartRepository);
 
             switch (command)
             {
@@ -60,18 +65,23 @@ namespace Eshop
                     break;
                 case AddItemToCartCommand.Name:
                     if (args != null && args.Length >= 1 && args[0] == "Товар")
-                        commandToExecute = AddItemToCartCommand.Execute(cart, _products.GetAll().ToList<Product>(), args);
+                        //commandToExecute = AddItemToCartCommand.Execute(_cart, _products.GetAll().ToList<Product>(), args);
+                        commandToExecute = _addItemToCartCommand.Execute(_products.GetAll().ToList<Product>(), args);
                     else
-                        commandToExecute = AddItemToCartCommand.Execute(cart, _services.GetAll().ToList<Service>(), args);
+                        //commandToExecute = AddItemToCartCommand.Execute(_cart, _services.GetAll().ToList<Service>(), args);
+                        commandToExecute = _addItemToCartCommand.Execute(_services.GetAll().ToList<Service>(), args);
                     break;
                 case ShowCartCommand.Name:
-                    commandToExecute = ShowCartCommand.Execute(cart, args);
+                    //commandToExecute = ShowCartCommand.Execute(_cart, args);
+                    commandToExecute =  _showCartCommand.Execute(args);
                     break;
                 case EmptyCartCommand.Name:
-                    commandToExecute = EmptyCartCommand.Execute(cart, args);
+                    //commandToExecute = EmptyCartCommand.Execute(_cart, args);
+                    commandToExecute = EmptyCartCommand.Execute(_cartRepository.GetByID(0) ?? new Cart(), args);
                     break;
                 case MakeOrderCommand.Name:
-                    commandToExecute = MakeOrderCommand.Execute(orders, cart, ref orderIndex, args);
+                    //commandToExecute = MakeOrderCommand.Execute(orders, _cart, ref orderIndex, args);
+                    commandToExecute = MakeOrderCommand.Execute(orders, _cartRepository.GetByID(0) ?? new Cart(), ref orderIndex, args);
                     break;
                 case ShowOrdersCommand.Name:
                     commandToExecute = ShowOrdersCommand.Execute(orders, args);

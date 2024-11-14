@@ -32,7 +32,7 @@ namespace Core
         /// <summary>
         /// Список торговых линий в заказе
         /// </summary>
-        public List<ItemsListLine<SaleItem>> Items => _items;          
+        public IReadOnlyCollection<ItemsListLine<SaleItem>> Items => _items;          
         
         /// <summary>
         /// ID документа об оплате (чека) заказа

@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="data\cart.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\products.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

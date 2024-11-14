@@ -19,5 +19,15 @@ namespace Eshop.DAL.Json
         {
             return new ServiceJsonRepository();
         }
+
+        public override IRepository<Cart> CreateCartRepository()
+        {
+            return new CartJsonRepository();
+        }
+
+        public override IRepository<Order> CreateOrderRepository()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,6 +10,16 @@ namespace Eshop.DAL.Memory
 {
     public class MemoryRepositoryFactory : RepositoryFactory
     {
+        public override IRepository<Cart> CreateCartRepository()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IRepository<Order> CreateOrderRepository()
+        {
+            throw new NotImplementedException();
+        }
+
         public override IRepository<Product> CreateProductRepository()
         {
             return new ProductMemoryRepository();

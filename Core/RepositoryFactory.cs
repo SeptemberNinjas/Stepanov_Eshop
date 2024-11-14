@@ -11,5 +11,7 @@ namespace Core
     {
         public abstract IRepository<Product> CreateProductRepository();
         public abstract IRepository<Service> CreateServiceRepository();
+        public abstract IRepository<Cart> CreateCartRepository();
+        public abstract IRepository<Order> CreateOrderRepository();
     }
 }

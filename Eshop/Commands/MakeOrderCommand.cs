@@ -22,7 +22,7 @@ namespace Eshop.Commands
                 return "Корзина пуста. Заказ не сформирован";
 
             orderId++;
-            orders.Add(new Order(orderId, cart.Items, cart.GetCartTotalCost()));
+            orders.Add(new Order(orderId, cart.Items.ToList(), cart.GetCartTotalCost()));
             
             cart.EmptyCart();
             

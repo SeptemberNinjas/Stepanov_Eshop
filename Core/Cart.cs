@@ -13,12 +13,23 @@ namespace Core
     public class Cart
     {
         private readonly List<ItemsListLine<SaleItem>> _items = new List<ItemsListLine<SaleItem>>();
-        
+
         /// <summary>
         /// Список торговых единиц в корзине
         /// </summary>
-        public List<ItemsListLine<SaleItem>> Items => _items;
-        
+        /// 
+        public IReadOnlyCollection<ItemsListLine<SaleItem>> Items => _items;
+
+        public Cart(List<ItemsListLine<SaleItem>> items)
+        {
+            _items = items;
+        }
+
+        public Cart()
+        {
+        }
+
+
         /// <summary>
         /// Добавить товар в корзину в указанном количестве
         /// </summary>
