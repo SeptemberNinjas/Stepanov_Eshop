@@ -1,1 +1,40 @@
-[]
+[
+  {
+    "Lines": [
+      {
+        "ItemType": 0,
+        "Product": {
+          "Stock": 2,
+          "Type": 0,
+          "Id": 1,
+          "Name": "\u0422\u0435\u043B\u0435\u0444\u043E\u043D 1",
+          "Price": 17500,
+          "Category": {
+            "Id": 1,
+            "Name": "\u0421\u043C\u0430\u0440\u0442\u0444\u043E\u043D\u044B"
+          },
+          "OnlyOneItem": false
+        },
+        "Service": null,
+        "Count": 1
+      },
+      {
+        "ItemType": 0,
+        "Product": {
+          "Stock": 14,
+          "Type": 0,
+          "Id": 2,
+          "Name": "\u0422\u0435\u043B\u0435\u0444\u043E\u043D 2",
+          "Price": 22000,
+          "Category": {
+            "Id": 1,
+            "Name": "\u0421\u043C\u0430\u0440\u0442\u0444\u043E\u043D\u044B"
+          },
+          "OnlyOneItem": false
+        },
+        "Service": null,
+        "Count": 1
+      }
+    ]
+  }
+]

@@ -8,7 +8,7 @@ namespace Core
 {
     /// <summary>
     /// Типы продукции
-    /// </summary>
+    /// </summary>    
     public enum ItemTypes
     {
         Product,

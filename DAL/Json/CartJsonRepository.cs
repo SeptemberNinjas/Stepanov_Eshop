@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace Eshop.DAL.Json
 {
-    public class CartJsonRepository : IRepository<Cart>
+    internal class CartJsonRepository : JsonRepository<CartEntity>, IRepository<Cart>
     {
-        private const string CartPath = "C:\\Users\\user\\source\\repos\\Eshop\\Eshop\\data\\cart.json";
-        public IReadOnlyCollection<Cart> GetAll()
-        {
-            return (IReadOnlyCollection<Cart>)GetCart();
-        }
+        private protected override string ResourceFilePath => "C:\\Users\\user\\source\\repos\\Eshop\\Eshop\\data\\cart.json";
+        //private protected override string ResourceFilePath => "data\\cart.json";
+
+        public IReadOnlyCollection<Cart> GetAll() => GetItemsFromFile()
+              .Select(b => (Cart)b)
+              .ToArray();
 
         public Cart? GetByID(int id)
         {
@@ -32,37 +33,14 @@ namespace Eshop.DAL.Json
             throw new NotImplementedException();
         }
         
-        private static IEnumerable<Cart> GetCart()
+        public void Update(Cart item)
         {
-            if (!File.Exists(CartPath))
-            {
-                using var sw = new StreamWriter(CartPath);
-                sw.WriteLine("[]");
-            }
-            
-            var str = File.ReadAllText(CartPath);
-            var result = JsonSerializer.Deserialize<IEnumerable<Cart>>(str);
-
-            //Cart cart = new Cart(result.ToList<ItemsListLine<SaleItem>>());
-
-            return (IEnumerable<Cart>)result;
-
+            SaveItemsToFile([(CartEntity)item]);            
         }
 
-        //public void Update(IEnumerable<SaleItem> items)
-        //public void Update(IReadOnlyCollection<ItemsListLine<SaleItem>> items)
-        public void Update(List<ItemsListLine<SaleItem>> items)
+        int IRepository<Cart>.Insert(Cart item)
         {
-            if (!File.Exists(CartPath))
-            {
-                using var sw = new StreamWriter(CartPath);
-                sw.WriteLine("[]");
-            }
-            string jsonStr = JsonSerializer.Serialize(items);
-            var result = JsonSerializer.Deserialize<List<ItemsListLine<SaleItem>>>(jsonStr);
-            File.WriteAllText(CartPath, jsonStr);
-
+            throw new NotImplementedException();
         }
-
     }
 }

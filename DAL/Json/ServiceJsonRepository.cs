@@ -48,5 +48,15 @@ namespace Eshop.DAL.Json
             return (IReadOnlyCollection<Service>)(result ?? []);
 
         }
+
+        public void Update(Service item)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IRepository<Service>.Insert(Service item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

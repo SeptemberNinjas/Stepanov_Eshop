@@ -1,20 +1,29 @@
 [
   {
     "Id": 1,
-    "Name": "Phone 1",
+    "Name": "Телефон 1",
     "Price": 17500,
-    "Stock": 3
+    "Stock": 3,
+    "Category": {"Id":1, "Name":"Смартфоны"}
   },
   {
     "Id": 2,
-    "Name": "Phone 2",
+    "Name": "Телефон 2",
     "Price": 22000,
-    "Stock": 15
+    "Stock": 15,
+    "Category": {
+      "Id": 1,
+      "Name": "Смартфоны"
+    }
   },
   {
     "Id": 3,
-    "Name": "Holod 3",
+    "Name": "Холодильник 1",
     "Price": 35700,
-    "Stock": 10
+    "Stock": 10,
+    "Category": {
+      "Id": 2,
+      "Name": "Холодильники"
+    }
   }
 ]

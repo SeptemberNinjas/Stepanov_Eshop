@@ -11,6 +11,8 @@ namespace Core
         IReadOnlyCollection<T> GetAll();
         int GetCount();
         T? GetByID(int id);
+        void Update(T item);
+        int Insert(T item);
 
     }
 }

@@ -89,8 +89,8 @@ namespace Eshop.Commands
             if (!itemFounded)
                 return "Товар под таким id не найден";
 
-            string answer = _cart.AddItem(foundProduct, countToAdd);
-            ((CartJsonRepository)_cartRepository).Update((List<ItemsListLine<SaleItem>>) _cart.Items);
+            string answer = _cart.AddItem(foundProduct, countToAdd);            
+            _cartRepository.Update(_cart);
 
             return answer;
 

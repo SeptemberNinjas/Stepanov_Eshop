@@ -52,5 +52,15 @@ namespace Eshop.DAL.Memory
             categories.Add(new ProductCategory(2, "Холодильники"));
             categories.Add(new ProductCategory(3, "Ноутбуки"));
         }
+
+        public void Update(Service item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Insert(Service item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace Core
     {
         private readonly T _lineItem;
 
+        public T LineItem => _lineItem;    
+        
         /// <summary>
         /// ID линии
         /// </summary>
@@ -38,6 +40,9 @@ namespace Core
         {
             _lineItem = lineItem;
             Count = count;
+        }
+        public ItemsListLine()
+        {
         }
 
         /// <summary>

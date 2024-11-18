@@ -65,5 +65,14 @@ namespace Eshop.DAL.Memory
             }
         }
 
+        public void Update(Product item)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IRepository<Product>.Insert(Product item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

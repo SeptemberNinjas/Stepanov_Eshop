@@ -18,15 +18,21 @@ namespace Core
         /// Список торговых единиц в корзине
         /// </summary>
         /// 
-        public IReadOnlyCollection<ItemsListLine<SaleItem>> Items => _items;
+        public List<ItemsListLine<SaleItem>> Items => _items;
 
         public Cart(List<ItemsListLine<SaleItem>> items)
         {
             _items = items;
         }
 
+        public Cart(IEnumerable<ItemsListLine<SaleItem>> items)
+        {
+            _items = items.ToList();
+        }
+
         public Cart()
         {
+            _items = [];
         }
 
 

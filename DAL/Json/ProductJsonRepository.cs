@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Eshop.DAL.Json
 {
-    internal class ProductJsonRepository : IRepository<Product>
+    internal class ProductJsonRepository : JsonRepository<Product>, IRepository<Product>
     {
+        private protected override string ResourceFilePath => throw new NotImplementedException();
+
         public IReadOnlyCollection<Product> GetAll()
         {
             return (IReadOnlyCollection<Product>)GetProducts();
@@ -49,6 +51,14 @@ namespace Eshop.DAL.Json
 
         }
 
+        public void Update(Product item)
+        {
+            throw new NotImplementedException();
+        }
 
+        int IRepository<Product>.Insert(Product item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
