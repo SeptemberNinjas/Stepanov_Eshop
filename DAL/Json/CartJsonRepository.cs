@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 namespace Eshop.DAL.Json
 {
     internal class CartJsonRepository : JsonRepository<CartEntity>, IRepository<Cart>
-    {
-        private protected override string ResourceFilePath => "C:\\Users\\user\\source\\repos\\Eshop\\Eshop\\data\\cart.json";
-        //private protected override string ResourceFilePath => "data\\cart.json";
+    {     
+        private protected override string ResourceFilePath => "data\\cart.json";
 
         public IReadOnlyCollection<Cart> GetAll() => GetItemsFromFile()
               .Select(b => (Cart)b)

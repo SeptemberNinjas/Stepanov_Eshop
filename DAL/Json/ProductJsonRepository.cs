@@ -11,7 +11,7 @@ namespace Eshop.DAL.Json
 {
     internal class ProductJsonRepository : JsonRepository<Product>, IRepository<Product>
     {
-        private protected override string ResourceFilePath => throw new NotImplementedException();
+        private protected override string ResourceFilePath => "data\\products.json";
 
         public IReadOnlyCollection<Product> GetAll()
         {
@@ -35,15 +35,15 @@ namespace Eshop.DAL.Json
             throw new NotImplementedException();
         }
 
-        private static IEnumerable<Product> GetProducts()
+        private IEnumerable<Product> GetProducts()
         {
-            if (!File.Exists("data\\products.json"))
+            if (!File.Exists(ResourceFilePath))
             {
-                using var sw = new StreamWriter("data\\products.json");
+                using var sw = new StreamWriter(ResourceFilePath);
                 sw.WriteLine("[]");
             }
 
-            using var sr = new StreamReader("data\\products.json");            
+            using var sr = new StreamReader(ResourceFilePath);            
 
             var result = JsonSerializer.Deserialize<IEnumerable<Product>>(sr.BaseStream);
 

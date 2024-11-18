@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Eshop.DAL.Json
 {
-    public class ServiceJsonRepository : IRepository<Service>
+    internal class ServiceJsonRepository : JsonRepository<Service>, IRepository<Service>
     {
+        private protected override string ResourceFilePath => "data\\services.json";
+
         public IReadOnlyCollection<Service> GetAll()
         {
             return (IReadOnlyCollection<Service>)GetServices();
@@ -33,15 +35,15 @@ namespace Eshop.DAL.Json
             throw new NotImplementedException();
         }
 
-        private static IEnumerable<Service> GetServices()
+        private IEnumerable<Service> GetServices()
         {
-            if (!File.Exists("data\\services.json"))
+            if (!File.Exists(ResourceFilePath))
             {
-                using var sw = new StreamWriter("data\\services.json");
+                using var sw = new StreamWriter(ResourceFilePath);
                 sw.WriteLine("[]");
             }
 
-            using var sr = new StreamReader("data\\services.json");
+            using var sr = new StreamReader(ResourceFilePath);
 
             var result = JsonSerializer.Deserialize<IEnumerable<Service>>(sr.BaseStream);
 

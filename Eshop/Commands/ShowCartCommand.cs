@@ -15,7 +15,7 @@ namespace Eshop.Commands
         public static Cart _cart;
         public ShowCartCommand(IRepository<Cart> cartRepository)
         {
-            _cart = cartRepository.GetAll().FirstOrDefault();
+            _cart = cartRepository.GetAll().FirstOrDefault() ?? new Cart();
         }
 
         public static string GetInfo()
